@@ -9,13 +9,43 @@ import APP_CONFIGS from './config/app-configs'
 import attachFastClick from 'fastclick'
 import vimo from 'vimo'
 
+import {Navbar} from 'vimo/components/Navbar'
+import {Toolbar,ToolbarTitle} from 'vimo/components/toolbar'
+import {Segment,SegmentButton} from 'vimo/components/segment'
+import {ActionSheet} from 'vimo/components/action-sheet'
+import {Button} from 'vimo/components/button'
+import {List} from 'vimo/components/list'
+import { Select, Option } from 'vimo/components/select'
+import { ListHeader, ItemGroup, Item, ItemSliding, ItemOptions, ItemDivider } from 'vimo/components/item'
+import {Label} from 'vimo/components/label'
+
 new attachFastClick(document.body)
 // 平台基础安装
 Vue.use(vimo, {
+  router: router,
   custConf: APP_CONFIGS,
   pltConf: PLATFORM_CONFIGS,
-  router: router,
 })
+
+Vue.component(Segment.name,Segment);
+Vue.component(SegmentButton.name,SegmentButton);
+
+Vue.component(Navbar.name,Navbar);
+Vue.component(Toolbar.name,Toolbar);
+Vue.component(ToolbarTitle.name,ToolbarTitle);
+
+Vue.component(Button.name,Button);
+Vue.component(List.name,List);
+Vue.component(Select.name,Select);
+Vue.component(Option.name,Option);
+Vue.component(ListHeader.name,ListHeader);
+Vue.component(Item.name,Item);
+Vue.component(ItemSliding.name,ItemSliding);
+Vue.component(Label.name,Label);
+
+
+Vue.prototype.$actionSheet = ActionSheet;
+
 
 Vue.config.productionTip = false
 
