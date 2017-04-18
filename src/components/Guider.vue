@@ -15,21 +15,21 @@
            <List>
                 <Item>
                     <Label>地区</Label>
-                    <Select item-right placeholder="杭州市西湖区" interface="action-sheet" @onChange="onChange">
+                    <Select item-right placeholder="杭州市西湖区" interface="alert" @onChange="onChange">
                         <Option value="f">Female</Option>
                         <Option value="m">Male</Option>
                     </Select>
                 </Item>
                <Item>
                    <Label>部门</Label>
-                   <Select item-right placeholder="Select" interface="action-sheet" @onChange="onChange">
+                   <Select item-right placeholder="Select" interface="alert" @onChange="onChange">
                        <Option value="f">Female</Option>
                        <Option value="m">Male</Option>
                    </Select>
                </Item>
                 <Item>
                    <Label>主题</Label>
-                   <Select item-right placeholder="Select" interface="action-sheet" @onChange="onChange">
+                   <Select item-right placeholder="Select" interface="alert" @onChange="onChange">
                        <Option value="f">Female</Option>
                        <Option value="m">Male</Option>
                    </Select>
@@ -66,7 +66,7 @@
 </template>
 <script>
   export default {
-    name: 'hello',
+    name: 'guider',
     data () {
       return {
         msg: 'Welcome to  Vimo!',
