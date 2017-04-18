@@ -2,64 +2,123 @@
     <Page>
         <Header>
             <Navbar>
-                <Title>Hello Vimo</Title>
+                <Title>个人办事</Title>
             </Navbar>
+            <Toolbar>
+                <Segment v-model="relationship" @onChange="onChange" class="layout">
+                    <SegmentButton value="1" @onSelected="showItem" >基本信息</SegmentButton>
+                    <SegmentButton value="2" @onSelected="showItem" v-on:click="showItem">申报材料</SegmentButton>
+                    <SegmentButton value="3" @onSelected="showItem" v-on:click="showItem">受理条件</SegmentButton>
+                </Segment>
+            </Toolbar>
         </Header>
-        <Content class="hello">
-            <img src="../assets/logo.png">
-            <h1>{{ msg }}</h1>
-            <h2>Essential Links</h2>
-            <ul>
-                <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-                <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-                <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-                <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-                <br>
-                <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-            </ul>
-            <h2>Ecosystem</h2>
-            <ul>
-                <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-                <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-                <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-                <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-            </ul>
+        <Content>
+            <div class="">
+              <List v-if="item1">
+                  <ListHeader @touchstart.native="onShow=!onShow">
+                      <span>必要材料{{relationship}}</span>
+                  </ListHeader>
+                  <Item v-if="onShow">item1
+                  </Item>
+                  <Item v-show="onShow">item1</Item>
+                  <Item v-show="onShow">item1</Item>
+                  <Item v-show="onShow">item1</Item>
+              </List>
+          <List v-if="item2">
+             <ListHeader @touchstart.native="onShow=!onShow">
+                 <span>必要材料{{relationship}}</span>
+             </ListHeader>
+             <Item v-if="onShow">item1
+             </Item>
+             <Item v-show="onShow">item2</Item>
+             <Item v-show="onShow">item1</Item>
+             <Item v-show="onShow">item1</Item>
+                        </List>
+          <List v-if="item3">
+             <ListHeader @touchstart.native="onShow=!onShow">
+                 <span>必要材料{{relationship}}</span>
+             </ListHeader>
+             <Item v-if="onShow">item1
+             </Item>
+             <Item v-show="onShow">item3</Item>
+             <Item v-show="onShow">item1</Item>
+             <Item v-show="onShow">item1</Item>
+          </List>
+            </div>
         </Content>
     </Page>
 </template>
-<script>
-  export default {
-    name: 'hello',
-    data () {
-      return {
-        msg: 'Welcome to  Vimo!'
-      }
-    },
-    methods:{
-      getData(){
-        this.$config.get('getMemberUrl')
-      }
-    },
-  }
-</script>
+<style scoped lang="scss">
+    .body {
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-    h1, h2 {
-        font-weight: normal;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
     }
 </style>
+<script type="text/ecmascript-6">
+  import { Navbar } from 'vimo/components/navbar'
+  import { Toolbar, ToolbarButtons, ToolbarTitle } from 'vimo/components/toolbar'
+  import { Segment, SegmentButton } from 'vimo/components/segment'
+  import { List } from 'vimo/components/list'
+  import { Item, ListHeader } from 'vimo/components/item'
+  const AS = 'as'
+  export default{
+    name: 'Banshi',
+    data(){
+      return {
+        relationship: 'item2',
+        onShow: true,
+        item1: true,
+        item2: false,
+        item3: false
+      }
+    },
+    watch: {
+      relationship(value){}
+    },
+    computed: {},
+    methods: {
+      nihao(){
+        alert('nihao')
+      },
+      onChange(value){
+        console.debug(value)
+      },
+      onSelected(value){
+        console.debug(value)
+      },
+      showItem(value){
+        let _this = this;
+        switch(value){
+          case "1":{
+            _this.item1 = true;
+            _this.item2 = false;
+            _this.item3 = false;
+          }
+          break;
+          case "2":{
+            _this.item1 = false;
+            _this.item2 = true;
+            _this.item3 = false;
+          }
+          break;
+          case "3":{
+            _this.item1 = false;
+            _this.item2 = false;
+            _this.item3 = true;
+          }
+        }
+      }
+    },
+    created: function () {
+      console.debug('created')
+
+      console.debug(this)
+      console.debug(this.relationship)
+
+    },
+    mounted: function () {
+      console.debug('mounted')
+
+    },
+    components: {Navbar , Toolbar, ToolbarButtons, "Title":ToolbarTitle , Segment, SegmentButton, List, Item, ListHeader}
+  }
+</script>

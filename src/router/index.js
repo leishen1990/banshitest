@@ -12,6 +12,11 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: Hello
+    },
+    {
+      path: '/banshiList',
+      name: 'banshiList',
+      component: require('@/components/banshiList')
     }
   ]
 })
