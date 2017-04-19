@@ -8,6 +8,7 @@ import PLATFORM_CONFIGS from './config/platform-configs'
 import APP_CONFIGS from './config/app-configs'
 import attachFastClick from 'fastclick'
 import vimo from 'vimo'
+import axios from 'axios'
 
 import {Navbar} from 'vimo/components/Navbar'
 import {Toolbar,ToolbarTitle} from 'vimo/components/toolbar'
@@ -42,9 +43,11 @@ Vue.component(ListHeader.name,ListHeader);
 Vue.component(Item.name,Item);
 Vue.component(ItemSliding.name,ItemSliding);
 Vue.component(Label.name,Label);
+Vue.component(ItemGroup.name,ItemGroup);
 
 
 Vue.prototype.$actionSheet = ActionSheet;
+Vue.prototype.$axios = axios;
 
 
 Vue.config.productionTip = false

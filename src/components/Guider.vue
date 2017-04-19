@@ -6,8 +6,8 @@
             </Navbar>
             <Toolbar>
                 <Segment v-model="seg" class="tab-layout">
-                    <SegmentButton value="1" >个人办事</SegmentButton>
-                    <SegmentButton value="2">法人办事</SegmentButton>
+                    <SegmentButton value="1" @onSelected="tabClick">个人办事</SegmentButton>
+                    <SegmentButton value="2" @onSelected="tabClick">法人办事</SegmentButton>
                 </Segment>
             </Toolbar>
         </Header>
@@ -15,23 +15,21 @@
            <List>
                 <Item>
                     <Label>地区</Label>
-                    <Select item-right placeholder="杭州市西湖区" interface="alert" @onChange="onChange">
+                    <Select item-right placeholder="请选择地区" interface="alert" @onChange="">
                         <Option value="f">Female</Option>
                         <Option value="m">Male</Option>
                     </Select>
                 </Item>
                <Item>
                    <Label>部门</Label>
-                   <Select item-right placeholder="Select" interface="alert" @onChange="onChange">
-                       <Option value="f">Female</Option>
-                       <Option value="m">Male</Option>
+                   <Select item-right placeholder="请选择部门" interface="alert" @onChange="">
+                       <Option v-for="item in sectorList" :value="item.id" :key="item.id">{{item.name}}</Option>
                    </Select>
                </Item>
                 <Item>
                    <Label>主题</Label>
-                   <Select item-right placeholder="Select" interface="alert" @onChange="onChange">
-                       <Option value="f">Female</Option>
-                       <Option value="m">Male</Option>
+                   <Select item-right placeholder="请选择主题" interface="alert" @onChange="">
+                       <Option v-for="item in themeList" :value="item.id" :key="item.id">{{item.name}}</Option>
                    </Select>
                </Item>
            </List>
@@ -65,23 +63,44 @@
     </Page>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     name: 'guider',
     data () {
       return {
         msg: 'Welcome to  Vimo!',
-        seg:"1"
+        seg:"1",
+        themeList:[],
+        sectorList:[],
+        type:1
       }
     },
     methods:{
-      getData(){
-        this.$config.get('getMemberUrl')
+      tabClick(value){
+       this.type = value;
+       this.initSelect();
       },
-      onChange(value){
-        console.log(value+"东汉莫妮娜")
+      initSelect(){
+        let scope = this;
+        let themeUrl = this.$config.get('getGrThems');
+        let deptsUrl = this.$config.get('showDepts');
+        axios.get(themeUrl).then(function(res){
+          scope.themeList = res.data;
+        });
+        axios.get(deptsUrl,{
+          params:{
+            type:scope.type,
+            webid:"3"
+          }
+        }).then(function(res){
+          scope.sectorList = res.data;
+        });
       }
     },
     components:{
+    },
+    created(){
+     this.initSelect();
     }
   }
 </script>

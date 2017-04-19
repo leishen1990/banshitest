@@ -54,11 +54,6 @@
     }
 </style>
 <script type="text/ecmascript-6">
-  import { Navbar } from 'vimo/components/navbar'
-  import { Toolbar, ToolbarButtons, ToolbarTitle } from 'vimo/components/toolbar'
-  import { Segment, SegmentButton } from 'vimo/components/segment'
-  import { List } from 'vimo/components/list'
-  import { Item, ListHeader } from 'vimo/components/item'
   const AS = 'as'
   export default{
     name: 'Banshi',
@@ -119,6 +114,6 @@
       console.debug('mounted')
 
     },
-    components: {Navbar , Toolbar, ToolbarButtons, "Title":ToolbarTitle , Segment, SegmentButton, List, Item, ListHeader}
+    components: {}
   }
 </script>

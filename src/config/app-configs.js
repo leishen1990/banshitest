@@ -8,6 +8,12 @@
  * 主要存放合成变量
  *
  */
-export default {
-  getMemberUrl: window.domain + '/member'
+var domain = window.domain;
+var interfaces = {
+  getGrThems:'/getGrThems.do',
+  showDepts:'/showDepts.do'
 };
+Object.keys(interfaces).forEach(function(e,i){
+  interfaces[e] = domain+interfaces[e]; 
+})
+export default interfaces
