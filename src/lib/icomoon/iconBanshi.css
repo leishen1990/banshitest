@@ -1,0 +1,41 @@
+@font-face {  
+  font-family: "iconBs";  
+  src: url("fonts/icomoon.eot");  
+  src: url("fonts/icomoon.eot?#iefix") format("embedded-opentype"),   
+  url("fonts/icomoon.woff") format("woff"),   
+  url("fonts/icomoon.ttf") format("truetype"),   
+  url("fonts/icomoon.svg#iconBs") format("svg");  
+  font-weight: normal;  
+  font-style: normal;  
+}
+[class*="icon-"] {  
+  display: inline;  
+  width: auto;  
+  height: auto;  
+  line-height: inherit;  
+  vertical-align: baseline;  
+  background-image: none;  
+  background-position: 0 0;  
+  background-repeat: repeat;  
+}  
+  
+[class*="icon-"]:before {  
+  font-family: "iconBs";  
+  font-weight: normal;  
+  font-style: normal;  
+  text-decoration: inherit;  
+  color:#1492ff;
+}  
+.icon-question:before { 
+  font-family: "iconBs"; 
+  content: "\e900";  
+}   
+.icon-location:before {  
+  content: "\e901";  
+}   
+.icon-map:before {  
+  content: "\e902";  
+}   
+.icon-phone:before {  
+  content: "\e903";  
+} 

@@ -42,7 +42,7 @@
                </ListHeader>
                <ItemGroup>
                    <Item button>
-                       <Label class="th-5">
+                       <Label class="th-5" >
                            <h2>内地居民婚姻登记证</h2>
                            <p>西湖区明政局</p>
                        </Label>

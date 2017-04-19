@@ -17,7 +17,10 @@ import {Button} from 'vimo/components/button'
 import {List} from 'vimo/components/list'
 import { Select, Option } from 'vimo/components/select'
 import { ListHeader, ItemGroup, Item, ItemSliding, ItemOptions, ItemDivider } from 'vimo/components/item'
-import {Label} from 'vimo/components/label'
+import { Label } from 'vimo/components/label'
+import { Icon } from 'vimo/components/icon'
+// import 'ionicons/dist/css/ionicons.css'
+import './lib/icomoon/iconBanshi.css'
 
 new attachFastClick(document.body)
 // 平台基础安装
@@ -42,6 +45,7 @@ Vue.component(ListHeader.name,ListHeader);
 Vue.component(Item.name,Item);
 Vue.component(ItemSliding.name,ItemSliding);
 Vue.component(Label.name,Label);
+Vue.component(Icon.name, Icon)
 
 
 Vue.prototype.$actionSheet = ActionSheet;
