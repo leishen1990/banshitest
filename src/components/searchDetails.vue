@@ -7,7 +7,7 @@
         </Header>
         <Content>
            <ItemGroup>
-                   <Item v-for="item in itemList" :key="item.id"   @click.native="closeModal(item)"><!-- :to="{name:'eventDetails'}" -->
+                   <Item v-for="item in itemList" :key="item.id"   @click.native="closeModal(item)">
                        <Label class="th-5" >
                            <h2>{{item.name}}</h2>
                            <p>{{item.qlfrom}}</p>
