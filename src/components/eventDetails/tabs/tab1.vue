@@ -4,7 +4,7 @@
       <h2>中华人民共和国</h2>
       <div class="details">
         <Grid>
-          <Row  v-for="(value,key,index) in obj" v-if="value"  v-show="index<l">
+          <Row  v-for="(value,key,index) in obj" v-if="value" :key="key"  v-show="index<l">
               <Column  col-5 style="text-align:left;">
                   {{objName[key]}}
               </Column>
@@ -16,25 +16,26 @@
         <Button @click="moreCol"></Button>
       </div>
       <List>
-        <Item :to="{name:'timePlace','sldd':sldd}">
-          <Icon name="icon-location" slot="item-left"></Icon>
+        <Item @click.native="timePlace(1)">
+          <Icon name="icon-location"  slot="item-left"></Icon>
           受理地点/时间
         </Item>
         <Item>
           <Icon name="icon-phone" slot="item-left"></Icon>
           投诉电话
-          <Note slot="item-right">0571-85068589</Note>
+
+          <Note slot="item-right"><a v-bind:href="tel+tsdh">{{tsdh}}</a></Note>
         </Item>
         <Item>
           <Icon name="icon-phone" slot="item-left"></Icon>
           监督投诉电话
-          <Note slot="item-right">0571-85171233</Note>
+          <Note slot="item-right"><a v-bind:href="tel+zxdh">{{zxdh}}</a></Note>
         </Item>
-        <Item >
+        <Item @click.native="timePlace(2)">
           <Icon name="icon-map" slot="item-left"></Icon>
           办理流程图
         </Item>
-        <Item :to="{name:'faq'}">
+        <Item @click.native="timePlace(3)">
           <Icon name="icon-question" slot="item-left" ></Icon>
           常见问题解答
         </Item>
@@ -55,8 +56,11 @@
   }
 </style>
 <script type="text/ecmascript-6">
-  import { Note } from 'vimo/components/note'
+  import { Note } from 'vimo/components/note' //:to="{name:'timePlace',params:{sldd:sldd}"
   import axios from 'axios'
+  import timePlaceTemplate from './tab1/timePlace.vue'
+  import faqTemplate from './tab1/faq.vue'
+  import processTemplate from './tab1/process.vue'
   export default {
     data(){
       return{
@@ -85,7 +89,13 @@
           qlly:"权利来源",
           zrcs:"责任处（科）室"
         },
-        sldd:''
+        sldd:'',
+        tsdh:'',
+        zxdh:'',
+        tel:"tel:",
+        cjwt:"",
+        template:[timePlaceTemplate,processTemplate,faqTemplate],
+        params:['sldd','bllct','cjwt']
       }
     },
     methods:{
@@ -98,15 +108,27 @@
       moreCol(){
         let scope = this;
         scope.l =  scope.l==5?10000:5;
+      },
+      timePlace(type){
+        let scope = this;
+        console.log(scope[scope.params[parseInt(type)-1]])
+        let template = scope.template[parseInt(type)-1];
+        this.$modal.present({
+          name:'受理时间地点',
+          position:'bottom',
+          template:template ,
+          modalData: {params:scope[scope.params[parseInt(type)-1]]},
+          onDismiss (data) {
+            debugger;
+          }
+        })
       }
     },
     components: {Note},
     created(){
       let scope = this;
       let params = this.$route.params;
-    /* let params = {
-      itemcode:"13565",
-      name:"伤残抚恤关系接收、转移的确认",
+     /*let params = {
       webid:"1"
      }*/
       let url = this.$config.get('showBasicInfo');
@@ -114,9 +136,14 @@
         params:params
       }).then(function(res){
         let data  = res.data;
+        data.sfsf = data.sfsf=="0"?"不收费":"收费";
         let obj = scope.obj;
         let i = 0; 
         scope.sldd = data.sldd;
+        scope.tsdh = data.tsdh;
+        scope.zxdh = data.zxdh;
+        scope.bllct = data.bllct;
+        scope.cjwt = data.cjwt;
         Object.keys(obj).forEach(function(e,j){
           if(!!data[e]){
            obj[e] = data[e];

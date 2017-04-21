@@ -2,12 +2,12 @@
   <Page class="page">
     <Header>
       <Navbar>
-        <Title>受理时间地点</Title>
+        <Title>办理流程图</Title>
       </Navbar>
     </Header>
     <Content >
-      <div  padding v-html="resdata">
-        
+      <div  padding >
+        <img :src="url" alt="">
       </div>
     </Content>
   </Page>
@@ -30,12 +30,13 @@
   export default{
     data(){
       return{
-        resdata:""
+        url:"http://www.zjzwfw.gov.cn/picture/0/170119224709983676.jpg"
       }
     },
     created(){
       let params = this.$options.modalData.params;
-      this.resdata = params;
+      if(!/http:/g.test(params)) params = "http://"+ params;
+      this.url = params;
     }
   }
 </script>

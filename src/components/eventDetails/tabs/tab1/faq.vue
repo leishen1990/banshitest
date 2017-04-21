@@ -6,14 +6,17 @@
       </Navbar>
     </Header>
     <Content>
-      <List>
+      <h4>
+        {{question}}
+      </h4>
+      <!-- <List>
         <Item>
           <Label>
             <h2>1.参保期间，如果姓名发生变更。。。。</h2>
             <p>答：饭店客房快放开贷款</p>
           </Label>
         </Item>
-      </List>
+      </List> -->
     </Content>
     <Footer>
         <Toolbar>
@@ -38,6 +41,15 @@
   import { Note } from 'vimo/components/note'
 
   export default {
-    components: {Note}
+    components: {Note},
+    data(){
+      return{
+        question:""
+      }
+    },
+    created(){
+      let params = this.$options.modalData.params;
+      this.question = params;
+    }
   }
 </script>
