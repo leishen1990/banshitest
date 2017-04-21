@@ -9,7 +9,7 @@ import APP_CONFIGS from './config/app-configs'
 import attachFastClick from 'fastclick'
 import vimo from 'vimo'
 import axios from 'axios'
-
+import { Column, Grid, Row } from 'vimo/components/grid'
 import {Navbar} from 'vimo/components/Navbar'
 import {Toolbar,ToolbarTitle} from 'vimo/components/toolbar'
 import {Segment,SegmentButton} from 'vimo/components/segment'
@@ -18,7 +18,13 @@ import {Button} from 'vimo/components/button'
 import {List} from 'vimo/components/list'
 import { Select, Option } from 'vimo/components/select'
 import { ListHeader, ItemGroup, Item, ItemSliding, ItemOptions, ItemDivider } from 'vimo/components/item'
-import {Label} from 'vimo/components/label'
+import {Modal} from 'vimo/components/modal'
+import { Label } from 'vimo/components/label'
+import { Icon } from 'vimo/components/icon'
+import {Input } from  'vimo/components/Input'
+// import 'ionicons/dist/css/ionicons.css'
+import './lib/icomoon/iconBanshi.css'
+
 
 new attachFastClick(document.body)
 // 平台基础安装
@@ -27,7 +33,9 @@ Vue.use(vimo, {
   custConf: APP_CONFIGS,
   pltConf: PLATFORM_CONFIGS,
 })
-
+Vue.component(Grid.name, Grid)
+Vue.component(Row.name, Row)
+Vue.component(Column.name, Column)
 Vue.component(Segment.name,Segment);
 Vue.component(SegmentButton.name,SegmentButton);
 
@@ -44,10 +52,12 @@ Vue.component(Item.name,Item);
 Vue.component(ItemSliding.name,ItemSliding);
 Vue.component(Label.name,Label);
 Vue.component(ItemGroup.name,ItemGroup);
-
+Vue.component(Icon.name, Icon);
+Vue.component(Input.name,Input);
 
 Vue.prototype.$actionSheet = ActionSheet;
 Vue.prototype.$axios = axios;
+Vue.prototype.$modal  = Modal;
 
 
 Vue.config.productionTip = false

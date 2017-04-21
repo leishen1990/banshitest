@@ -11,7 +11,12 @@
 var domain = window.domain;
 var interfaces = {
   getGrThems:'/getGrThems.do',
-  showDepts:'/showDepts.do'
+  getFrThems:'/getFrThems.do',
+  showDepts:'/showDepts.do',
+  getNewGrItems:'/getNewGrItems.do',
+  getBsznCailiaoList:'/getBsznCailiaoList.do',
+  showBasicInfo:'/showBasicInfo.do',
+  getBsznCondition:'/getBsznCondition.do'
 };
 Object.keys(interfaces).forEach(function(e,i){
   interfaces[e] = domain+interfaces[e]; 

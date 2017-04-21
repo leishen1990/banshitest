@@ -1,0 +1,18 @@
+[class*="icon-"] {
+  display: inline-block;
+  background: url() no-repeat center center/100% 100%;
+  width: 15px;
+  height: 15px;
+}
+.icon-location{
+  background-image: url(../assets/location.png);
+}
+.icon-phone{
+  background-image: url(../assets/phone.png);
+}
+.icon-map{
+  background-image: url(../assets/map.png);
+}
+.icon-question{
+  background-image: url(../assets/question.png);
+}
