@@ -22,6 +22,8 @@ import {Modal} from 'vimo/components/modal'
 import { Label } from 'vimo/components/label'
 import { Icon } from 'vimo/components/icon'
 import {Input } from  'vimo/components/Input'
+import {Spinner } from  'vimo/components/spinner'
+
 // import 'ionicons/dist/css/ionicons.css'
 import './lib/icomoon/iconBanshi.css'
 
@@ -54,6 +56,7 @@ Vue.component(Label.name,Label);
 Vue.component(ItemGroup.name,ItemGroup);
 Vue.component(Icon.name, Icon);
 Vue.component(Input.name,Input);
+Vue.component(Spinner.name,Spinner);
 
 Vue.prototype.$actionSheet = ActionSheet;
 Vue.prototype.$axios = axios;

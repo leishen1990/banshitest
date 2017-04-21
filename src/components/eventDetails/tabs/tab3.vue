@@ -42,7 +42,10 @@
         params:params
       }).then(function(res){
         scope.url = res.data.sqtj;
-        console.log(Base64)
+        if(!scope.url){
+          scope.url = "没有条件！！"
+          return;
+        }
         var base = new Base64();
         scope.url = base.decode(res.data.sqtj);
       })

@@ -5,7 +5,7 @@
                 <Title>个人办事</Title>
             </Navbar>
             <Toolbar>
-                <Segment v-model="relationship" @onChange="onChange" class="">
+                <Segment v-model="relationship" @onChange="onChange">
                     <SegmentButton value="1" @onSelected="showItem" >基本信息</SegmentButton>
                     <SegmentButton value="2" @onSelected="showItem" v-on:click="showItem">申报材料</SegmentButton>
                     <SegmentButton value="3" @onSelected="showItem" v-on:click="showItem">受理条件</SegmentButton>

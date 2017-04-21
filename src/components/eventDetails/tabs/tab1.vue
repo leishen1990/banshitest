@@ -13,7 +13,7 @@
               </Column>
           </Row>
         </Grid>
-        <Button @click="moreCol"></Button>
+        <i @click="moreCol" class="but"></i>
       </div>
       <List>
         <Item @click.native="timePlace(1)">
@@ -46,12 +46,22 @@
 <style scoped lang="scss">
   .page{
     font-family:microsoft YaHei;
+    h2 {
+      font-size: 18px;
+    }
     .note{
       color:#1492ff;
     }
     .details{
       background:#f5f8f7;
       font-size:15px;
+    }
+    .but {
+      margin: 10px auto;
+      display: block;
+      width: 50px;
+      height: 30px;
+      background: url("../../../assets/downDetail.png") no-repeat 100% 100%
     }
   }
 </style>
@@ -128,15 +138,14 @@
     created(){
       let scope = this;
       let params = this.$route.params;
-     /*let params = {
-      webid:"1"
-     }*/
       let url = this.$config.get('showBasicInfo');
       axios.get(url,{
         params:params
       }).then(function(res){
         let data  = res.data;
         data.sfsf = data.sfsf=="0"?"不收费":"收费";
+        data.cnqx += "工作日";
+        data.fdqx += "工作日";
         let obj = scope.obj;
         let i = 0; 
         scope.sldd = data.sldd;
@@ -159,9 +168,7 @@
     },
     events: {
       done(data) {
-          debugger
           scope.data =data;
-          debugger
       }
     }
   }
