@@ -1,19 +1,36 @@
 <template>
     <Page>
-        <Header>
+        <!-- <Header>
             <Navbar>
                 <Title>个人办事</Title>
             </Navbar>
-        </Header>
+        </Header> -->
         <Content>
-
             <List>
-              <Item v-for="(item,index) in itemList" :key="index" @click.native="closeModal(item)" >
-                <Label class="th-5" >
-                    <h2>{{item.name}}</h2>
-                    <p>{{item.qlfrom}}</p>
-                </Label>
-                <div class="hasChildren" v-if="parseInt(item.isHaveChildren)"></div>
+              <Item v-for="(item,index) in itemList" :key="index">
+                <Grid>
+                  <Row class="parent">
+                    <Column col-10 @click.native = "closeModal(item)"class='item1'>
+                      <Label class="th-5" >
+                          {{childShowList[index]}}
+                          <h2>{{item.name}}</h2>
+                          <p>{{item.qlfrom}}</p>
+                      </Label>
+                    </Column>
+                    <Column col-2   @click.native='goChild(item,index)' v-if="parseInt(item.isHaveChildren)">
+                      <div class="hasChildren" ></div>
+                    </Column>
+                  </Row>
+                  <!-- <Row v-for="(item,index) in child"> -->
+                  <Row class="child" v-if="parseInt(item.isHaveChildren)" >
+                    <Column>
+                      <Label>
+                          <h2>微风问问人</h2>
+                          <p>二恶热热无热无若翁任务</p>
+                      </Label>
+                    </Column>
+                  </Row>
+                </Grid>
               </Item>
             </List>
             <InfiniteScroll class="infiniteScroll" :enabled="true" threshold="10%" @onInfinite="onInfinite">
@@ -24,11 +41,40 @@
     </Page>
 </template>
 <style scoped lang="scss">
+    .label{
+        margin: 0;
+      }
+    .parent {
+      h2 {
+        font-size: 16px;
+        padding: 5px 0
+      }
+      p{
+        padding: 2px 0
+      }
+    }
+    .child {
+      margin-top: 5px;
+      margin-left: 12px;
+      border-top: 1px solid rgb(200,199,204);
+      border-left: 1px solid rgb(200,199,204);
+      padding-left: 5px;
+      h2 {
+        font-size: 14px;
+        padding: 5px 0
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+    .item1 {
+      padding:0;
+    }
     .hasChildren{
-      background: url("../assets/biao60.png");
-      width: 20px;
-      height: 20px;
-      background-size: contain;
+      background: url("../assets/biao60.png") no-repeat;
+      height: 100%;
+      background-size: 50% 40%;
+      background-position: center center;
     }
 </style>
 <script type="text/ecmascript-6">
@@ -47,14 +93,40 @@
        params:"",
        start:0,
        end:10,
-       url:""
+       url:"",
+       child:{},
+       childShowList:[]
       }
     },
     watch: {
       relationship(value){}
     },
-    computed: {},
+    /*computed: {
+      this.childShowList.forEach(function(item){
+        item = false;
+      })
+    },*/
     methods: {
+      goChild(item,i){
+      let scope = this;
+      scope.childShow[i] = !scope.childShow[i];
+      let item1 = item; 
+      let params = {
+        webId:"3",
+        itemId:item.id,
+        mainCode:item.maincode,
+        deptId:item.deptid,
+        type:item.groupname,
+        itemType:item.type
+      };
+      let url = this.$config.get('getChildrenItems');
+      axios.get(url,{
+        params:params
+      }).then(function(res){
+        scope.child = res;
+        debugger;
+      })
+    },
      getRes(value){
      },
      directTo(){
@@ -71,7 +143,7 @@
           infiniteScroll.complete();
         })
      },
-     closeModal(item){
+     closeModal(item,e){
       let res = {
         itemcode:item.id,
         name:item.name
@@ -81,6 +153,7 @@
        })
      }
     },
+    
     created(){
      let scope = this;
      let params = this.$options.modalData.params;
@@ -91,6 +164,7 @@
       params:params
      }).then(function(res){
       scope.itemList = res.data;
+      scope.childShowList = new Array(res.data.length);
      });
     },
     activated(){

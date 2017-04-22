@@ -1,9 +1,9 @@
 <template>
     <Page>
         <Header>
-            <Navbar >
+            <!-- <Navbar >
                 <Title>个人办事</Title>
-            </Navbar>
+            </Navbar> -->
             <Toolbar>
                 <Segment v-model="relationship" >
                     <SegmentButton value="1">基本信息</SegmentButton>

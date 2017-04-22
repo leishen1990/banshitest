@@ -66,9 +66,12 @@
     created(){
       let scope = this;
       let params = this.$route.params;
+      params.itemCode = this.$route.params.itemid;
+      delete params.itemcode;
+      debugger;
       let url = this.$config.get('getBsznCailiaoList');
       axios.get(url,{
-        params:{webid:"1"}
+        params:{webid:"1"} /*params*/
       }).then(function(res){
         scope.res = res.data.cailiao;
       })

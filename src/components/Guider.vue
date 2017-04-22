@@ -1,25 +1,25 @@
 <template>
     <Page>
-        <Header>
-            <Navbar>
-                <Title>办事指南</Title>
-            </Navbar>
-            <Toolbar>
-                <Segment v-model="seg" class="tab-layout">
-                    <SegmentButton value="1" @onSelected="tabClick">个人办事</SegmentButton>
-                    <SegmentButton value="2" @onSelected="tabClick">法人办事</SegmentButton>
-                </Segment>
-            </Toolbar>
-        </Header>
+        <!-- <Header>
+             <Navbar>
+            </Navbar> 
+            
+        </Header> -->
         <Content class="hello">
+          <Toolbar>
+              <Segment v-model="seg" class="tab-layout">
+                  <SegmentButton value="1" @onSelected="tabClick">个人办事</SegmentButton>
+                  <SegmentButton value="2" @onSelected="tabClick">法人办事</SegmentButton>
+              </Segment>
+          </Toolbar>
            <List>
-                <Item>
-                    <Label>地区：</Label>
-                    <Select item-right placeholder="请选择地区" interface="alert" @onChange="">
-                        <Option value="f">Female</Option>
-                        <Option value="m">Male</Option>
-                    </Select>
-                </Item>
+               <!--  <Item>
+                   <Label>地区：</Label>
+                   <Select item-right placeholder="请选择地区" interface="alert" @onChange="">
+                       <Option value="f">Female</Option>
+                       <Option value="m">Male</Option>
+                   </Select>
+               </Item> -->
                <Item>
                    <Label>部门：</Label>
                    <Select item-right placeholder="请选择部门" v-model="deptid" interface="alert" >
@@ -34,7 +34,7 @@
                </Item>
                 <Item>
                     <Label color="primary">关键字：</Label>
-                    <Input item-right placeholder="请输入关键字" v-model="word"></Input>
+                    <Input item-right placeholder="请输入关键字" v-model="word" class='inp'></Input>
                 </Item>
            </List>
            <Button style="width:90%;" @click="toSearchDetails">搜索</Button>

@@ -1,7 +1,7 @@
 <template>
   <Page class="page">
     <Content>
-      <h2>中华人民共和国</h2>
+      <h2>{{name}}</h2>
       <div class="details">
         <Grid>
           <Row  v-for="(value,key,index) in obj" v-if="value" :key="key"  v-show="index<l">
@@ -99,6 +99,7 @@
           qlly:"权利来源",
           zrcs:"责任处（科）室"
         },
+        name:'',
         sldd:'',
         tsdh:'',
         zxdh:'',
@@ -153,6 +154,7 @@
         scope.zxdh = data.zxdh;
         scope.bllct = data.bllct;
         scope.cjwt = data.cjwt;
+        scope.name = data.name;
         Object.keys(obj).forEach(function(e,j){
           if(!!data[e]){
            obj[e] = data[e];
