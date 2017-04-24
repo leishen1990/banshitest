@@ -7,26 +7,26 @@
         </Header> -->
         <Content>
             <List>
-              <Item v-for="(item,index) in itemList" :key="index">
+              <Item v-for="(item,index) in itemList" :key="item.id" :class="{'isShow':selectId===item.id}">
                 <Grid>
                   <Row class="parent">
                     <Column col-10 @click.native = "closeModal(item)"class='item1'>
                       <Label class="th-5" >
-                          {{childShowList[index]}}
-                          <h2>{{item.name}}</h2>
+                          <!-- {{childShowList[index]}} -->
+                          <h2>{{item.name}} : {{child[index]}}</h2>
                           <p>{{item.qlfrom}}</p>
                       </Label>
                     </Column>
-                    <Column col-2   @click.native='goChild(item,index)' v-if="parseInt(item.isHaveChildren)">
+                    <Column col-2 @click.native='goChild(item,index)' v-if="parseInt(item.isHaveChildren)" :key="item.id">
                       <div class="hasChildren" ></div>
                     </Column>
                   </Row>
                   <!-- <Row v-for="(item,index) in child"> -->
-                  <Row class="child" v-if="parseInt(item.isHaveChildren)" >
+                  <Row class="child" v-if="parseInt(item.isHaveChildren)"  v-for="(item1,index1) in item.childArr" :key="item1.id" id="item.id">
                     <Column>
                       <Label>
-                          <h2>微风问问人</h2>
-                          <p>二恶热热无热无若翁任务</p>
+                          <h2>{{item1.name}}</h2>
+                          <p>{{item1.qlfrom}}</p>
                       </Label>
                     </Column>
                   </Row>
@@ -41,6 +41,11 @@
     </Page>
 </template>
 <style scoped lang="scss">
+    .isShow{
+      .child{
+        display: block;
+      }
+    }
     .label{
         margin: 0;
       }
@@ -54,11 +59,11 @@
       }
     }
     .child {
-      margin-top: 5px;
       margin-left: 12px;
       border-top: 1px solid rgb(200,199,204);
       border-left: 1px solid rgb(200,199,204);
       padding-left: 5px;
+      display:none;
       h2 {
         font-size: 14px;
         padding: 5px 0
@@ -94,8 +99,11 @@
        start:0,
        end:10,
        url:"",
-       child:{},
-       childShowList:[]
+       child:[],
+       childShowList:[],
+       type:"",
+       selectId:"",
+
       }
     },
     watch: {
@@ -107,25 +115,53 @@
       })
     },*/
     methods: {
-      goChild(item,i){
-      let scope = this;
-      scope.childShow[i] = !scope.childShow[i];
-      let item1 = item; 
-      let params = {
-        webId:"3",
-        itemId:item.id,
-        mainCode:item.maincode,
-        deptId:item.deptid,
-        type:item.groupname,
-        itemType:item.type
-      };
-      let url = this.$config.get('getChildrenItems');
-      axios.get(url,{
-        params:params
-      }).then(function(res){
-        scope.child = res;
-        debugger;
-      })
+      goChild(item,index){
+        let scope = this;
+    
+
+if(scope.selectId === item.id){
+scope.selectId = null
+}else{
+  scope.selectId = item.id
+}
+
+      if(!!scope.childShowList[index]){
+        // scope.childShow[i] = !scope.childShow[i];
+        // let item1 = item; 
+        scope.childShowList[index] = false;
+      }else{
+        let params = {
+          webId:"1",
+          itemId:item.id,
+          mainCode:item.maincode,
+          deptId:item.deptid,
+          type:scope.params.type,
+          itemType:item.type
+        };
+        let url = this.$config.get('getChildrenItems');
+        axios.get(url,{
+          params:params
+        }).then(function(res){
+          //debugger
+          //scope.child[index] = res.data;
+          //scope.childShowList[index] = true;
+
+
+
+for(let i=0,len=scope.itemList.length;len>i;i++){
+let _item = scope.itemList[i]
+    if(_item.id ===item.id ){
+      _item.childArr =  res.data
+      break;
+    }
+}
+   
+
+
+
+
+        })
+      }
     },
      getRes(value){
      },
@@ -157,21 +193,27 @@
     created(){
      let scope = this;
      let params = this.$options.modalData.params;
+     debugger;
      scope.params = params;
      let getNewGrItems = this.$config.get('getNewGrItems');
      scope.url = getNewGrItems;
      axios.get(getNewGrItems,{
       params:params
      }).then(function(res){
+      res.data.forEach((item)=>{
+          item.childArr=[];
+      })
       scope.itemList = res.data;
+
+
+
       scope.childShowList = new Array(res.data.length);
+      scope.child = new Array(res.data.length); 
      });
     },
     activated(){
     },
     mounted: function () {
-    },
-    ready(){
     }
     // components: {Navbar , Toolbar, ToolbarButtons, "Title":ToolbarTitle , Segment, SegmentButton, List, Item, ListHeader}
   }

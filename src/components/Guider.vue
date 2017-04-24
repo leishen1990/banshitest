@@ -13,22 +13,22 @@
               </Segment>
           </Toolbar>
            <List>
-               <!--  <Item>
+                <Item>
                    <Label>地区：</Label>
                    <Select item-right placeholder="请选择地区" interface="alert" @onChange="">
                        <Option value="f">Female</Option>
                        <Option value="m">Male</Option>
                    </Select>
-               </Item> -->
+               </Item>
                <Item>
                    <Label>部门：</Label>
-                   <Select item-right placeholder="请选择部门" v-model="deptid" interface="alert" >
+                   <Select item-right placeholder="请选择部门" :cancelText="cancelText" :okText="okText" v-model="deptid" interface="alert" >
                        <Option v-for="item in sectorList" :value="item.id" :key="item.id">{{item.name}}</Option>
                    </Select>
                </Item>
                 <Item>
                    <Label>主题：</Label>
-                   <Select item-right placeholder="请选择主题" v-model="themid" interface="alert" @onChange="">
+                   <Select item-right placeholder="请选择主题" :cancelText="cancelText" :okText="okText" v-model="themid" interface="alert" @onChange="">
                        <Option v-for="item in themeList" :value="item.id" :key="item.id">{{item.name}}</Option>
                    </Select>
                </Item>
@@ -81,7 +81,9 @@
         themid:"",
         deptid:"",
         word:"",
-        webid:"1"
+        webid:"1",
+        cancelText:"取消",
+        okText:"确定",
       }
     },
     methods:{
@@ -122,7 +124,8 @@
             deptid:scope.deptid,
             word:scope.word,
             start:0,
-            end:10
+            end:20,
+            type:scope.seg
           }
         this.$modal.present({
           name:'modal_1',
@@ -178,5 +181,9 @@
     }
     .th-5>h2,.th-5>p{
       line-height:30px;
+    }
+    .toolbar-ios .segment-button {
+      height: 35px; 
+      line-height: 35px;   
     }
 </style>
