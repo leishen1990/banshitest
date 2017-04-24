@@ -38,7 +38,7 @@
                 </Item>
            </List>
            <Button style="width:90%;" @click="toSearchDetails">搜索</Button>
-           <List>
+           <!-- <List>
                <ListHeader>
                    大家都在搜：
                </ListHeader>
@@ -62,7 +62,7 @@
                        </Label>
                    </Item>
                </ItemGroup>
-           </List>
+           </List> -->
         </Content>
     </Page>
 </template>
@@ -117,7 +117,7 @@
       toSearchDetails(){
         let scope = this;
         let params = {
-            webid:scope.webid,
+            webid: scope.webid,
             themid:scope.themid,
             deptid:scope.deptid,
             word:scope.word,

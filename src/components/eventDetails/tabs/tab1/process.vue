@@ -1,10 +1,10 @@
 <template>
   <Page class="page">
-    <Header>
+    <!-- <Header>
       <Navbar>
         <Title>办理流程图</Title>
       </Navbar>
-    </Header>
+    </Header> -->
     <Content >
       <div  padding >
         <img :src="url" alt="">
