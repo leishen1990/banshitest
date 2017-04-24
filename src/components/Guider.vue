@@ -15,9 +15,9 @@
            <List>
                 <Item>
                    <Label>地区：</Label>
-                   <Select item-right placeholder="请选择地区" interface="alert" @onChange="">
-                       <Option value="f">Female</Option>
-                       <Option value="m">Male</Option>
+                   <Select item-right placeholder="请选择地区" @click.native="test">
+                       <!-- <Option value="f">Female</Option>
+                       <Option value="m">Male</Option> -->
                    </Select>
                </Item>
                <Item>
@@ -90,6 +90,9 @@
       tabClick(value){
        this.type = value;
        this.reloadSelect(value);
+      },
+      test(){
+        debugger
       },
       initSelect(){
         let scope = this;

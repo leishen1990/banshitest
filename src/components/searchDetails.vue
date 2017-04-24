@@ -13,11 +13,11 @@
                     <Column col-10 @click.native = "closeModal(item)"class='item1'>
                       <Label class="th-5" >
                           <!-- {{childShowList[index]}} -->
-                          <h2>{{item.name}} : {{child[index]}}</h2>
+                          <h2>{{item.name}}</h2>
                           <p>{{item.qlfrom}}</p>
                       </Label>
                     </Column>
-                    <Column col-2 @click.native='goChild(item,index)' v-if="parseInt(item.isHaveChildren)" :key="item.id">
+                    <Column col-2 @click.native.present='goChild(item,index)' v-if="parseInt(item.isHaveChildren)" :key="item.id">
                       <div class="hasChildren" ></div>
                     </Column>
                   </Row>
@@ -52,7 +52,9 @@
     .parent {
       h2 {
         font-size: 16px;
-        padding: 5px 0
+        padding: 5px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       p{
         padding: 2px 0
@@ -119,49 +121,32 @@
         let scope = this;
     
 
-if(scope.selectId === item.id){
-scope.selectId = null
-}else{
-  scope.selectId = item.id
-}
-
-      if(!!scope.childShowList[index]){
-        // scope.childShow[i] = !scope.childShow[i];
-        // let item1 = item; 
-        scope.childShowList[index] = false;
+      if(scope.selectId === item.id){
+        scope.selectId = null
       }else{
-        let params = {
-          webId:"1",
-          itemId:item.id,
-          mainCode:item.maincode,
-          deptId:item.deptid,
-          type:scope.params.type,
-          itemType:item.type
-        };
-        let url = this.$config.get('getChildrenItems');
-        axios.get(url,{
-          params:params
-        }).then(function(res){
-          //debugger
-          //scope.child[index] = res.data;
-          //scope.childShowList[index] = true;
-
-
-
-for(let i=0,len=scope.itemList.length;len>i;i++){
-let _item = scope.itemList[i]
-    if(_item.id ===item.id ){
-      _item.childArr =  res.data
-      break;
-    }
-}
-   
-
-
-
-
-        })
+        scope.selectId = item.id
       }
+
+      let params = {
+        webId:"1",
+        itemId:item.id,
+        mainCode:item.maincode,
+        deptId:item.deptid,
+        type:scope.params.type,
+        itemType:item.type
+      };
+      let url = this.$config.get('getChildrenItems');
+      axios.get(url,{
+        params:params
+      }).then(function(res){
+        for(let i=0,len=scope.itemList.length;len>i;i++){
+          let _item = scope.itemList[i]
+          if(_item.id ===item.id ){
+            _item.childArr =  res.data
+            break;
+          }
+        }
+      })
     },
      getRes(value){
      },
@@ -193,7 +178,6 @@ let _item = scope.itemList[i]
     created(){
      let scope = this;
      let params = this.$options.modalData.params;
-     debugger;
      scope.params = params;
      let getNewGrItems = this.$config.get('getNewGrItems');
      scope.url = getNewGrItems;
@@ -203,6 +187,7 @@ let _item = scope.itemList[i]
       res.data.forEach((item)=>{
           item.childArr=[];
       })
+
       scope.itemList = res.data;
 
 

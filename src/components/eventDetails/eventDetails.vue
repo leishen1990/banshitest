@@ -21,6 +21,10 @@
     .note-ios{
       color:#1492ff;
     }
+    .toolbar-ios .segment-button {
+      height: 30px; 
+      line-height: 30px;   
+    }
 </style>
 <script type="text/ecmascript-6">
   export default{
