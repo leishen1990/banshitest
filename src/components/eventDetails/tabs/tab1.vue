@@ -4,16 +4,31 @@
       <h2>{{name}}</h2>
       <div class="details">
         <Grid>
-          <Row  v-for="(value,key,index) in obj" v-if="value" :key="key"  v-show="index<l">
-              <Column  col-5 style="text-align:left;">
-                  {{objName[key]}}
-              </Column>
-              <Column col-7 style="text-align:right;">
-                  {{value}}
-              </Column>
-          </Row>
+          
+              <Row  v-for="(value,key,index) in obj" v-if="value&&index<l" :key="key"  >
+                  <Column  col-5 style="text-align:left;">
+                      {{objName[key]}}
+                  </Column>
+                  <Column col-7 style="text-align:right;">
+                      {{value}}
+                  </Column>
+              </Row>
+              <div :class="{length:length,length1:length1}"  style="overflow:hidden;">
+                <div :class="{pos:pos,pos1:pos1}">
+                    <Row  v-for="(value,key,index) in obj" v-if="value&&index>=l" :key="key"  >
+                        <Column  col-5 style="text-align:left;">
+                            {{objName[key]}}
+                        </Column>
+                        <Column col-7 style="text-align:right;">
+                            {{value}}
+                        </Column>
+                    </Row>
+                </div>
+              </div>
         </Grid>
-        <i @click="moreCol" class="but"></i>
+        
+           <i @click="moreCol" class="but"></i>
+       
       </div>
       <List>
         <Item @click.native="timePlace(1)">
@@ -44,6 +59,30 @@
   </Page>
 </template>
 <style scoped lang="scss">
+   .rela{
+    position:relative;
+   }
+  .pos{
+    position:relative;
+    top:-80px;
+    transition:top .5s cubic-bezier(0.96, 0.15, 0.82, 0);
+  }
+
+  .pos1{
+    position:relative;
+    top:0px;
+    transition:top .5s cubic-bezier(0.96, 0.15, 0.82, 0);
+  } 
+
+   .length{
+    height:0px;
+    transition:all .5s cubic-bezier(0.96, 0.15, 0.82, 0);
+  }
+  .length1{
+    height:100px;
+    transition:all .5s cubic-bezier(0.96, 0.15, 0.82, 0);
+  } 
+  
   .page{
     font-family:microsoft YaHei;
     h2 {
@@ -71,9 +110,14 @@
   import timePlaceTemplate from './tab1/timePlace.vue'
   import faqTemplate from './tab1/faq.vue'
   import processTemplate from './tab1/process.vue'
+  //import  'velocity'
   export default {
     data(){
       return{
+        pos:true,
+        pos1:false,
+        length:true,
+        length1:false,
         pre:true,
         suf:false,
         i:0,
@@ -118,7 +162,10 @@
       },
       moreCol(){
         let scope = this;
-        scope.l =  scope.l==5?10000:5;
+        scope.length = scope.length?false:true;
+        scope.length1 = scope.length?false:true;
+        scope.pos = scope.pos?false:true;
+        scope.pos1 = scope.pos?false:true;
       },
       timePlace(type){
         let scope = this;

@@ -1,10 +1,5 @@
 <template>
     <Page>
-        <!-- <Header>
-             <Navbar>
-            </Navbar> 
-            
-        </Header> -->
         <Content class="hello">
           <Toolbar>
               <Segment v-model="seg" class="tab-layout">
