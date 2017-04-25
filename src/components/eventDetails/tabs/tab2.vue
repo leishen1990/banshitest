@@ -3,7 +3,7 @@
     <Content>
        <h5><i id="material"></i>必要材料</h5>    
       <div v-html="res" id="cailiao"></div>
-      <!-- <List class="lh-lg">
+      <List class="lh-lg">
         <ListHeader class="lh-lg">
            <div id="material"></div>
            <h2 >
@@ -49,7 +49,7 @@
           </p>
           <Note slot="item-right">0571-85171233</Note>
         </Item>
-      </List> -->
+      </List>
     </Content>
   </Page>
 </template>
@@ -66,9 +66,13 @@
     created(){
       let scope = this;
       let params = this.$route.params;
+      // params.itemCode = this.$route.params.itemid;
+      // delete params.itemcode;
+      // params;
+      // debugger;
       let url = this.$config.get('getBsznCailiaoList');
       axios.get(url,{
-        params:{webid:"1"}
+        params: params
       }).then(function(res){
         scope.res = res.data.cailiao;
       })

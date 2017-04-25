@@ -1,10 +1,10 @@
 <template>
   <Page class="page">
-    <Header>
+    <!-- <Header>
       <Navbar>
         <Title>常见问题解答</Title>
       </Navbar>
-    </Header>
+    </Header> -->
     <Content>
       <h4>
         {{question}}

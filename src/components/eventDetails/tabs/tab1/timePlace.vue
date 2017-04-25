@@ -1,10 +1,10 @@
 <template>
   <Page class="page">
-    <Header>
+    <!-- <Header>
       <Navbar>
         <Title>受理时间地点</Title>
       </Navbar>
-    </Header>
+    </Header> -->
     <Content >
       <div  padding v-html="resdata">
         

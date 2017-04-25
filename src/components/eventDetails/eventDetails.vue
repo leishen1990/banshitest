@@ -1,9 +1,9 @@
 <template>
     <Page>
         <Header>
-            <Navbar >
+            <!-- <Navbar >
                 <Title>个人办事</Title>
-            </Navbar>
+            </Navbar> -->
             <Toolbar>
                 <Segment v-model="relationship" >
                     <SegmentButton value="1">基本信息</SegmentButton>
@@ -20,6 +20,10 @@
 <style scoped lang="scss">
     .note-ios{
       color:#1492ff;
+    }
+    .toolbar-ios .segment-button {
+      height: 30px; 
+      line-height: 30px;   
     }
 </style>
 <script type="text/ecmascript-6">

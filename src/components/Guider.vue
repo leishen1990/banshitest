@@ -1,39 +1,39 @@
 <template>
     <Page>
         <Content class="hello">
-           <Toolbar>
-                <Segment v-model="seg" class="tab-layout">
-                    <SegmentButton value="1" @onSelected="tabClick">个人办事</SegmentButton>
-                    <SegmentButton value="2" @onSelected="tabClick">法人办事</SegmentButton>
-                </Segment>
-            </Toolbar>
+          <Toolbar>
+              <Segment v-model="seg" class="tab-layout">
+                  <SegmentButton value="1" @onSelected="tabClick">个人办事</SegmentButton>
+                  <SegmentButton value="2" @onSelected="tabClick">法人办事</SegmentButton>
+              </Segment>
+          </Toolbar>
            <List>
                 <Item>
-                    <Label>地区：</Label>
-                    <Select item-right placeholder="请选择地区" interface="alert" @onChange="">
-                        <Option value="f">Female</Option>
-                        <Option value="m">Male</Option>
-                    </Select>
-                </Item>
+                   <Label>地区：</Label>
+                   <Select item-right placeholder="请选择地区" @click.native="test">
+                       <!-- <Option value="f">Female</Option>
+                       <Option value="m">Male</Option> -->
+                   </Select>
+               </Item>
                <Item>
                    <Label>部门：</Label>
-                   <Select item-right placeholder="请选择部门" v-model="deptid" interface="alert" >
+                   <Select item-right placeholder="请选择部门" :cancelText="cancelText" :okText="okText" v-model="deptid" interface="alert" >
                        <Option v-for="item in sectorList" :value="item.id" :key="item.id">{{item.name}}</Option>
                    </Select>
                </Item>
                 <Item>
                    <Label>主题：</Label>
-                   <Select item-right placeholder="请选择主题" v-model="themid" interface="alert" @onChange="">
+                   <Select item-right placeholder="请选择主题" :cancelText="cancelText" :okText="okText" v-model="themid" interface="alert" @onChange="">
                        <Option v-for="item in themeList" :value="item.id" :key="item.id">{{item.name}}</Option>
                    </Select>
                </Item>
                 <Item>
                     <Label color="primary">关键字：</Label>
-                    <Input item-right placeholder="请输入关键字" v-model="word"></Input>
+                    <Input item-right placeholder="请输入关键字" v-model="word" class='inp'></Input>
                 </Item>
            </List>
            <Button style="width:90%;" @click="toSearchDetails">搜索</Button>
-           <List>
+           <!-- <List>
                <ListHeader>
                    大家都在搜：
                </ListHeader>
@@ -57,7 +57,7 @@
                        </Label>
                    </Item>
                </ItemGroup>
-           </List>
+           </List> -->
         </Content>
     </Page>
 </template>
@@ -76,13 +76,18 @@
         themid:"",
         deptid:"",
         word:"",
-        webid:"1"
+        webid:"1",
+        cancelText:"取消",
+        okText:"确定",
       }
     },
     methods:{
       tabClick(value){
        this.type = value;
        this.reloadSelect(value);
+      },
+      test(){
+        debugger
       },
       initSelect(){
         let scope = this;
@@ -112,12 +117,13 @@
       toSearchDetails(){
         let scope = this;
         let params = {
-            webid:scope.webid,
+            webid: scope.webid,
             themid:scope.themid,
             deptid:scope.deptid,
             word:scope.word,
             start:0,
-            end:10
+            end:20,
+            type:scope.seg
           }
         this.$modal.present({
           name:'modal_1',
@@ -173,5 +179,9 @@
     }
     .th-5>h2,.th-5>p{
       line-height:30px;
+    }
+    .toolbar-ios .segment-button {
+      height: 35px; 
+      line-height: 35px;   
     }
 </style>
