@@ -1,17 +1,12 @@
 <template>
     <Page>
-        <Header>
-            <Navbar>
-                <Title>办事指南</Title>
-            </Navbar>
-            <Toolbar>
+        <Content class="hello">
+           <Toolbar>
                 <Segment v-model="seg" class="tab-layout">
                     <SegmentButton value="1" @onSelected="tabClick">个人办事</SegmentButton>
                     <SegmentButton value="2" @onSelected="tabClick">法人办事</SegmentButton>
                 </Segment>
             </Toolbar>
-        </Header>
-        <Content class="hello">
            <List>
                 <Item>
                     <Label>地区：</Label>
