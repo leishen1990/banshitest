@@ -206,8 +206,8 @@
         Object.keys(obj).forEach(function(e,j){
           if(!!data[e]){
            obj[e] = data[e];
-           if(i<5) scope.preOrSuf[j] = 'pre';
-           else scope.preOrSuf[j] = 'suf';
+           // if(i<5) scope.preOrSuf[j] = 'pre';
+           // else scope.preOrSuf[j] = 'suf';
            i++;
           }else{
             delete scope.obj[e];

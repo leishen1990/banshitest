@@ -1,8 +1,8 @@
 <template>
   <Page>
     <Content>
-       <h5><i id="material"></i>必要材料</h5>    
-      <div v-html="res" id="cailiao"></div>
+       <!-- <h5><i id="material"></i>必要材料</h5>     -->
+      <!-- <div v-html="res" id="cailiao"></div> -->
       <List class="lh-lg">
         <ListHeader class="lh-lg">
            <div id="material"></div>
@@ -10,10 +10,13 @@
              必要材料
            </h2>
         </ListHeader>
-        <Item>
-          <p>受理地点/时间666</p>
+        <Item v-for = "item in res">
+          <p>{{item.name}}</p>
         </Item>
-        <Item>
+        <Item v-if="!res">
+          <p>目前还没有没有所需材料</p>
+        </Item>
+        <!-- <Item>
           <p>
           投诉电话
           </p>
@@ -48,7 +51,7 @@
             监督投诉电话
           </p>
           <Note slot="item-right">0571-85171233</Note>
-        </Item>
+        </Item> -->
       </List>
     </Content>
   </Page>
