@@ -155,7 +155,7 @@
      },
      onInfinite(infiniteScroll){
         let scope = this;
-        scope.params.start += 10;
+        // scope.params.start = 0;
         scope.params.end += 10; 
         axios.get(scope.url,{
           params:scope.params

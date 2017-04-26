@@ -10,8 +10,9 @@
              必要材料
            </h2>
         </ListHeader>
-        <Item v-for = "item in res">
-          <p>{{item.name}}</p>
+        <Item class="cl" v-for = "item in res" :key="item.id">
+          <p>{{item.name}} </p>
+          <button class="xiangxi" item-right @click="details(item.id)">详细</button>
         </Item>
         <Item v-if="!res">
           <p>目前还没有没有所需材料</p>
@@ -59,16 +60,39 @@
 <script type="ecmascript-6">
   import { Note } from 'vimo/components/note'
   import axios from 'axios'
+  import tab2Detail from './tab2Detail.vue' 
   export default {
     data(){
       return{
         res:""
       }
     },
+    methods:{
+      details(id){
+        console.log(tab2Detail);
+        // debugger
+        let params = this.params;
+        params.did = id;
+        this.$modal.present({
+          name:'tab2Detail',
+          position:'bottom',
+          template: tab2Detail,
+          modalData: {params:params},
+          onDismiss (data) {
+            // data.result.webid = scope.webid
+            // scope.$router.push({
+            //   name:'eventDetails',
+            //   params:data.result
+            // })
+          }
+        })
+      }
+    },
     components: {Note},
     created(){
       let scope = this;
       let params = this.$route.params;
+      scope.params = params;
       // params.itemCode = this.$route.params.itemid;
       // delete params.itemcode;
       // params;
@@ -114,5 +138,17 @@
     padding-left: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
+  }
+  .cl {
+    position: relative;
+  }
+  .cl .xiangxi{
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    color: #fff;
+    background-color: rgba(30,130,210,.7);
+    display:block;
+    padding: 5px;
   }
 </style>
