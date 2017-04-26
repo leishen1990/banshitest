@@ -23,4 +23,9 @@
         text-align: center;
         color: #2c3e50;
     }
+    .lei{
+        .select-placeholder{
+             color:#000!important;
+        }
+    } 
 </style>

@@ -10,7 +10,7 @@
            <List>
                 <Item>
                    <Label>地区：</Label>
-                   <Select item-right placeholder="请选择地区" @click.native="test">
+                   <Select item-right :placeholder="placeholder" :class="{isSelected:lei}" selectedText="dinglei" v-on:click.native.capture.stop="test" >
                        <!-- <Option value="f">Female</Option>
                        <Option value="m">Male</Option> -->
                    </Select>
@@ -79,6 +79,9 @@
         webid:"1",
         cancelText:"取消",
         okText:"确定",
+        disabled:true,
+        placeholder:"请输入地区",
+        isSelected:false
       }
     },
     methods:{
@@ -86,8 +89,19 @@
        this.type = value;
        this.reloadSelect(value);
       },
-      test(){
-        debugger
+      test(event){
+        let scope = this;
+        dd.biz.util.selectCity({
+            onSuccess : function(data) {
+              scope.webid = data.webId;
+              scope.placeholder = data.cityName;
+              scope.isSelected = true;
+                log('selectCity success, return', data)},
+            onFail : function(err) {
+                log('selectCity called failed', err) },
+            onCancel : function(err) {
+                log('selectCity canceled', err) }
+        })
       },
       initSelect(){
         let scope = this;
@@ -150,6 +164,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    
+     
+   
     h1, h2 {
         font-weight: normal;
     }
