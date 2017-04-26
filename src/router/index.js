@@ -16,7 +16,7 @@ export default new Router({
     {
       path: '/searchDetails',
       name: 'searchDetails',
-     component:searchDetails
+      component:searchDetails
     },
     {
       path: '/faq',
@@ -63,5 +63,12 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/tab2Detail',
+      name: 'tab2Detail',
+      component(resolve){
+        require(['@/components/eventDetails/tabs/tab2Detail'], resolve)
+      }
+    }
   ]
 })

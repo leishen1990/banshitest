@@ -10,7 +10,11 @@
            <List>
                 <Item>
                    <Label>地区：</Label>
+<<<<<<< HEAD
                    <Select item-right :placeholder="placeholder" :class="{isSelected:lei}" selectedText="dinglei" v-on:click.native.capture.stop="test" >
+=======
+                   <Select item-right placeholder="请选择地区" v-on:click.native.capture.stop="test" >
+>>>>>>> 0bcee18ecf5215cf2d70b92009cb1f773b48374d
                        <!-- <Option value="f">Female</Option>
                        <Option value="m">Male</Option> -->
                    </Select>
