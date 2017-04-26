@@ -59,28 +59,29 @@
   </Page>
 </template>
 <style scoped lang="scss">
+    $test:cubic-bezier(0.53, 0.22, 0.76, 0.25);
    .rela{
     position:relative;
    }
   .pos{
     position:relative;
     top:-80px;
-    transition:top .5s cubic-bezier(0.96, 0.15, 0.82, 0);
+    transition:top .5s $test;
   }
 
   .pos1{
     position:relative;
     top:0px;
-    transition:top .5s cubic-bezier(0.96, 0.15, 0.82, 0);
+    transition:top .5s $test;
   } 
 
    .length{
     height:0px;
-    transition:all .5s cubic-bezier(0.96, 0.15, 0.82, 0);
+    transition:all .5s $test;
   }
   .length1{
     height:100px;
-    transition:all .5s cubic-bezier(0.96, 0.15, 0.82, 0);
+    transition:all .5s $test;
   } 
   
   .page{
